@@ -6,7 +6,7 @@ require 'rdoc/task'
 require 'cucumber'
 require 'cucumber/rake/task'
 require 'epub/parser/version'
-require 'rubyzip'
+require 'zip'
 
 task :default => :test
 task :test => 'test:default'
