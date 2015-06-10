@@ -6,7 +6,7 @@ require 'rdoc/task'
 require 'cucumber'
 require 'cucumber/rake/task'
 require 'epub/parser/version'
-require 'zipruby'
+require 'rubyzip'
 
 task :default => :test
 task :test => 'test:default'
@@ -22,7 +22,7 @@ namespace :test do
     input_dir  = 'test/fixtures/book'
     sh "epzip #{input_dir}"
     small_file = File.read("#{input_dir}/OPS/case-sensitive.xhtml")
-    Zip::Archive.open "#{input_dir}.epub" do |archive|
+    Zip::File.open "#{input_dir}.epub" do |archive|
       archive.add_buffer 'OPS/CASE-SENSITIVE.xhtml', small_file.sub('small file name', 'LARGE FILE NAME')
     end
   end

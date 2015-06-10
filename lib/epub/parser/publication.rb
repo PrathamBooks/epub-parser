@@ -1,5 +1,5 @@
 require 'strscan'
-require 'zipruby'
+require 'rubyzip'
 require 'nokogiri'
 require 'addressable/uri'
 require 'epub/publication'
@@ -12,7 +12,8 @@ module EPUB
 
       class << self
         def parse(zip_archive, file)
-          opf = zip_archive.fopen(Addressable::URI.unencode(file)) {|member| member.read}
+          
+          opf = zip_archive.glob(Addressable::URI.unencode(file)).first.get_input_stream.read
 
           new(opf, file).parse
         end

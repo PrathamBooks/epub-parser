@@ -4,9 +4,10 @@ require File.expand_path 'helper', File.dirname(__FILE__)
 class TestParserOCF < Test::Unit::TestCase
   def setup
     file = 'test/fixtures/book.epub'
-    @zip = Zip::Archive.open(file)
+    @zip = Zip::File.open(file)
     @parser = EPUB::Parser::OCF.new(@zip)
-    @container_xml = @zip.fopen('META-INF/container.xml').read
+    
+    @container_xml = @zip.glob('META-INF/container.xml').first.get_input_stream.read
   end
 
   def teardown

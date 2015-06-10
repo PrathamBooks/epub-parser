@@ -1,6 +1,6 @@
 require 'epub/constants'
 require 'epub/ocf'
-require 'zipruby'
+require 'rubyzip'
 require 'nokogiri'
 
 module EPUB
@@ -25,9 +25,9 @@ module EPUB
       def parse
         EPUB::OCF::MODULES.each do |m|
           begin
-            data = @zip.fopen(File.join(DIRECTORY, "#{m}.xml")) {|file| file.read}
+            data = @zip.glob(File.join(DIRECTORY, "#{m}.xml")).first.get_input_stream.read
             @ocf.__send__ "#{m}=", __send__("parse_#{m}", data)
-          rescue Zip::Error
+          rescue Exception
           end
         end
 
