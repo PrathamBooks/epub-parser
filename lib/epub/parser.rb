@@ -1,6 +1,6 @@
 require 'epub'
 require 'epub/constants'
-require 'rubyzip'
+require 'zip'
 require 'nokogiri'
 
 module EPUB

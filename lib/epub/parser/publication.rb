@@ -1,5 +1,5 @@
 require 'strscan'
-require 'rubyzip'
+require 'zip'
 require 'nokogiri'
 require 'addressable/uri'
 require 'epub/publication'
